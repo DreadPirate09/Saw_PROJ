@@ -22,3 +22,75 @@ insert into telefoane (producator, model, pret) values
 
 -- -------------------------------------------------------------------
 
+drop table if exists calculatoare;
+create table calculatoare(
+ id bigint auto_increment primary key,
+ producator varchar(20) not null default 'fara_producator',
+ placa_video varchar(20) not null default 'fara_model',
+ pret int not null default '0',
+ ram varchar(20) not null default 'fara_model',
+ procesor varchar(20) not null default 'fara_model',
+ creation_date timestamp not null default current_timestamp
+);
+
+insert into calculatoare (producator, placa_video, pret, ram, procesor) values
+('flamingo','rtx2060',4000,'16gb','i3'),
+('samsung','AMD RADEON',5000,'8gb','amd'),
+('lenovo','rtx3050ti',1000,'4gb','i5');
+
+-- -------------------------------------------------------------------
+
+drop table if exists televizoare;
+create table televizoare(
+ id bigint auto_increment primary key,
+ producator varchar(20) not null default 'fara_producator',
+ diagonala varchar(20) not null default 'fara_diagonoala',
+ pret int not null default '0',
+ culoare varchar(20) not null default 'fara_model',
+ tip_ecran varchar(20) not null default 'fara_model',
+ creation_date timestamp not null default current_timestamp
+);
+
+insert into televizoare (producator, diagonala, pret, culoare, tip_ecran) values
+('flamingo','60cm',4000,'negru','lcd'),
+('samsung','48cm',3000,'negru','led'),
+('lenovo','80cm',7000,'negru','led');
+
+-- -------------------------------------------------------------------
+
+drop table if exists monitoare;
+create table monitoare(
+ id bigint auto_increment primary key,
+ producator varchar(20) not null default 'fara_producator',
+ frame_rate varchar(20) not null default 'fara_model_frame_rate',
+ pret int not null default '0',
+ diagonala varchar(20) not null default 'fara_model',
+ tip_ecran varchar(20) not null default 'fara_model',
+ creation_date timestamp not null default current_timestamp
+);
+
+insert into monitoare (producator, frame_rate, pret, diagonala, tip_ecran) values
+('asus','60hz',4000,'20','lcd'),
+('samsung','120hz RADEON',5000,'16','led'),
+('dell','144hz',1000,'30','lcd');
+
+-- -------------------------------------------------------------------
+
+drop table if exists tastaturi;
+create table tastaturi(
+ id bigint auto_increment primary key,
+ producator varchar(20) not null default 'fara_producator',
+ tip_cablu varchar(20) not null default 'fara_tip_cablu',
+ pret int not null default '0',
+ culoare varchar(20) not null default 'fara_culoare',
+ rgb varchar(20) not null default 'fara_rgb',
+ creation_date timestamp not null default current_timestamp
+);
+
+insert into tastaturi (producator, tip_cablu, pret, culoare, rgb) values
+('asus','usb',100,'neagra','da'),
+('samsung','usb-c',200,'alba','nu'),
+('lenovo','usb',150,'neagra','nu');
+
+-- -------------------------------------------------------------------
+

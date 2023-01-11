@@ -21,10 +21,10 @@
 			$fields.="producator";
 			$values.='"'.$_GET["producator"].'"';
 		}
-		if(isset($_GET["model"]))
+		if(isset($_GET["placa_video"]))
 		{
-			$fields.=",model";
-			$values.=',"'.$_GET["model"].'"';
+			$fields.=",placa_video";
+			$values.=',"'.$_GET["placa_video"].'"';
 		}
 		if(isset($_GET["pret"]))
 		{ 
@@ -36,13 +36,13 @@
 			$fields.=",ram";
 			$values.=',"'.$_GET["ram"].'"';
 		}
-		if(isset($_GET["color"]))
+		if(isset($_GET["procesor"]))
 		{ 
-			$fields.=",color";
-			$values.=',"'.$_GET["color"].'"';
+			$fields.=",procesor";
+			$values.=',"'.$_GET["procesor"].'"';
 		}
 		
-		$query="INSERT INTO telefoane(".$fields.") VALUES (".$values.")";		
+		$query="INSERT INTO calculatoare(".$fields.") VALUES (".$values.")";		
 		$result=$connection->query($query);
 		//echo $query."<br/>";
 		
@@ -70,14 +70,14 @@
 			$limitClause="LIMIT ".$_GET["base"].",".$_GET["count"];
 		}
 
-		$count = $connection->query("SELECT count(*) as total_no_of_items FROM telefoane");
+		$count = $connection->query("SELECT count(*) as total_no_of_items FROM calculatoare");
 		if($item = $count->fetch_array())
 		{
 			$nTotalNoOfItems=$item['total_no_of_items'];
 		}
 		$count->close();
 		
-		$items = $connection->query("SELECT * FROM telefoane ".$whereClause." ORDER BY id ".$limitClause);
+		$items = $connection->query("SELECT * FROM calculatoare ".$whereClause." ORDER BY id ".$limitClause);
 		$nNoOfItems = $items->num_rows;
 		
 		$index=0;
@@ -87,10 +87,10 @@
 			echo '{';
 			echo '"id":'				.	''.$item['id'].''.					' , ';
 			echo '"producator":'		.	'"'.$item['producator'].'"'.		' , ';
-			echo '"model":'				.	'"'.$item['model'].'"'.				' , ';
+			echo '"placa_video":'				.	'"'.$item['placa_video'].'"'.				' , ';
 			echo '"pret":'				.	''.$item['pret'].''.				' , ';
 			echo '"ram":'				.	'"'.$item['ram'].'"'.				' , ';
-			echo '"color":'				.	'"'.$item['color'].'"'.				' , ';
+			echo '"procesor":'				.	'"'.$item['procesor'].'"'.				' , ';
 			echo '"creation_date":'		.	'"'.$item['creation_date'].'"'.		'   ';
 			echo '}';
 			
@@ -114,9 +114,9 @@
 			$maps.='producator="'.$_GET["producator"].'"';
 			$comma=',';
 		}
-		if(isset($_GET["model"]))
+		if(isset($_GET["placa_video"]))
 		{
-			$maps.=$comma.'model="'.$_GET["model"].'"';
+			$maps.=$comma.'placa_video="'.$_GET["placa_video"].'"';
 			$comma=',';
 		}
 		if(isset($_GET["pret"]))
@@ -129,13 +129,13 @@
 			$maps.=$comma.'ram="'.$_GET["ram"].'"';
 			$comma=',';
 		}
-		if(isset($_GET["color"]))
+		if(isset($_GET["procesor"]))
 		{
-			$maps.=$comma.'color="'.$_GET["color"].'"';
+			$maps.=$comma.'procesor="'.$_GET["procesor"].'"';
 			$comma=',';
 		}
 		
-		$query="UPDATE telefoane SET ".$maps." WHERE id=".$_GET["id"];
+		$query="UPDATE calculatoare SET ".$maps." WHERE id=".$_GET["id"];
 		echo $query;
 		$result=$connection->query($query);
 		//echo $query."<br/>";
@@ -153,7 +153,7 @@
 	else if(isset($_GET["delete"]))
 	{
 		$id=$_GET["id"];
-		$query="DELETE FROM telefoane WHERE id=".$_GET["id"];
+		$query="DELETE FROM calculatoare WHERE id=".$_GET["id"];
 		
 		$result=$connection->query($query);
 		//echo $query."<br/>";

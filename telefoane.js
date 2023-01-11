@@ -46,6 +46,8 @@ Telefoane.prototype.onRead=function(data)
 			items[i].producator,
 			items[i].model,
 			items[i].pret,
+			items[i].ram,
+			items[i].color,
 			items[i].creation_date);
 	}
 	console.log("loaded the children");
@@ -73,10 +75,12 @@ Telefoane.prototype.show=function()
 	{				
 		itemTelefon=$(
 		'<a href="#" class="list-group-item" id="telefon'+this.children[i].id+'">'+
-		'Producator: '+this.children[i].producator+' '+
-		'Model: '+this.children[i].model+' '+
-		'Pret: '+this.children[i].pret+' '+
-		'Created at: '+this.children[i].creation_date+' '+
+		' <h4>Producator: '+this.children[i].producator+' </h4>'+
+		' <h4>Model: '+this.children[i].model+' </h4>'+
+		' <h4>Pret: '+this.children[i].pret+' </h4>'+
+		' <h4>Ram: '+this.children[i].ram+' </h4>'+
+		' <h4>Color: '+this.children[i].color+' </h4>'+
+		' <h4>Created at: '+this.children[i].creation_date+' </h4>'+
 		'</a>' +
 		
 		//'<span class="badge">'+this.children[i].id+'</span>'+
@@ -102,23 +106,37 @@ Telefoane.prototype.newTelefon=function()
 	
 	var divInputGroup=$('<div class="input-group input-group-sm" id="inputGroup"> </div>');
 	divInputGroup.append($(
-		'<div class="input-group">'+
-		'<span class="input-group-addon">Name</span>'+		
-		'<input id="name" type="text" class="form-control" placeholder="name">'+
+		'<div class="input-group" style="padding: 10px;">'+
+		'<span class="input-group-addon" style="width: 150px; color: white;">Name</span>'+		
+		'<input id="name" type="text" class="form-control" placeholder="name" style="border-radius: 25px;">'+
 		'</div>'+
 		''
 	));
 	divInputGroup.append($(
-		'<div class="input-group">'+
-		'<span class="input-group-addon">Model</span>'+		
-		'<input id="model" type="text" class="form-control" placeholder="model">'+
+		'<div class="input-group" style="padding: 10px;">'+
+		'<span class="input-group-addon" style="width: 150px; color: white;">Model</span>'+		
+		'<input id="model" type="text" class="form-control" placeholder="model" style="border-radius: 25px;">'+
 		'</div>'+
 		''
 	));
 	divInputGroup.append($(
-		'<div class="input-group">'+
-		'<span class="input-group-addon">Pret</span>'+		
-		'<input id="pret" type="text" class="form-control" placeholder="pret">'+
+		'<div class="input-group" style="padding: 10px;">'+
+		'<span class="input-group-addon" style="width: 150px; color: white;">Pret</span>'+		
+		'<input id="pret" type="text" class="form-control" placeholder="pret" style="border-radius: 25px;">'+
+		'</div>'+
+		''
+	));
+	divInputGroup.append($(
+		'<div class="input-group" style="padding: 10px;">'+
+		'<span class="input-group-addon" style="width: 150px; color: white;">Ram</span>'+		
+		'<input id="ram" type="text" class="form-control" placeholder="ram" style="border-radius: 25px;">'+
+		'</div>'+
+		''
+	));
+	divInputGroup.append($(
+		'<div class="input-group" style="padding: 10px;">'+
+		'<span class="input-group-addon" style="width: 150px; color: white;">Color</span>'+		
+		'<input id="Color" type="text" class="form-control" placeholder="Color" style="border-radius: 25px;">'+
 		'</div>'+
 		''
 	));
@@ -139,11 +157,13 @@ Telefoane.prototype.createTelefon=function()
 	var name=$("#name").val();
 	var model=$("#model").val();
 	var pret=$("#pret").val();
+	var ram=$("#ram").val();
+	var color=$("#color").val();
 	
 	var telefoane=this;	
 	$.ajax(
 	{
-		url: "./telefoane.php?create=1&producator="+name+"&model="+model+"&pret="+pret,
+		url: "./telefoane.php?create=1&producator="+name+"&model="+model+"&pret="+pret+"&ram="+ram+"&color="+color,
 		beforeSend : function(xhr) 
 		{
 			xhr.overrideMimeType("text/plain; charset=x-user-defined");
@@ -198,13 +218,15 @@ Telefoane.prototype.getTelefon=function(data, id)
 			var divTelefoane=$('<div class="list-group"> </div>');
 			itemTelefon=$(
 			'<a href="#" class="list-group-item" id="telefon'+items[i].id+'">'+
-			'Producator: '+items[i].producator+' '+
-			'Model: '+items[i].model+' '+
-			'Pret: '+items[i].pret+' '+
-			'Created at: '+items[i].creation_date+' '+
+			' <h4>Producator: '+items[i].producator+'  </h4>'+
+			' <h4>Model: '+items[i].model+'  </h4>'+
+			' <h4>Pret: '+items[i].pret+'  </h4>'+
+			' <h4>Ram: '+items[i].ram+'  </h4>'+
+			' <h4>Color: '+items[i].color+'  </h4>'+
+			' <h4>Created at: '+items[i].creation_date+'  </h4>'+
 			//'<span class="badge">'+this.children[i].id+'</span>'+
 			'<div class="btn-group btn-group-xs pull-right">'+
-			'<button type="button" class="btn btn-primary" onclick="Telefoane.prototype.read();">'+
+			'<button type="button" class="btn btn-primary" onclick="Telefoane.prototype.read(); Calculatoare.prototype.read();">'+
 			'<span class="glyphicon glyphicon-eye-open"/> Show All</button>'+
 			'</div>'+
 			'</a>'
@@ -237,6 +259,8 @@ Telefoane.prototype.setTelefon=function(telefon)
 	'Producator: '+telefon.producator+' '+
 	'Model: '+telefon.model+' '+
 	'Pret: '+telefon.pret+' '+
+	'Ram: '+telefon.ram+' '+
+	'Color: '+telefon.color+' '+
 	'Created at: '+telefon.creation_date+' '+
 	'</a>'
 	);		
@@ -271,22 +295,34 @@ Telefoane.prototype.editTelefon=function(id)
 		}
 		var divInputGroup=$('<div class="input-group input-group-sm" id="inputGroup"> </div>');
 		divInputGroup.append($(
-			'<div class="input-group">'+
-			'<span class="input-group-addon">Name</span>'+		
+			'<div class="input-group" style="padding: 10px;">'+
+			'<span class="input-group-addon" style="width: 150px; color: white;">Name</span>'+		
 			'<input id="name" type="text" class="form-control" placeholder="name" value="'+
 			itemToEdit.producator+'">'+
 			'</div>'+
 			
-			'<div class="input-group">'+
-			'<span class="input-group-addon">Model</span>'+		
+			'<div class="input-group" style="padding: 10px;">'+
+			'<span class="input-group-addon" style="width: 150px; color: white;">Model</span>'+		
 			'<input id="model" type="text" class="form-control" placeholder="model" value="'+
 			itemToEdit.model+'">'+
-
 			'</div>'+
-			'<div class="input-group">'+
-			'<span class="input-group-addon">Pret</span>'+		
+
+			'<div class="input-group" style="padding: 10px;">'+
+			'<span class="input-group-addon" style="width: 150px; color: white;">Pret</span>'+		
 			'<input id="pret" type="text" class="form-control" placeholder="pret" value="'+
 			itemToEdit.pret+'">'+
+			'</div>'+
+
+			'<div class="input-group" style="padding: 10px;">'+
+			'<span class="input-group-addon" style="width: 150px; color: white;">Ram</span>'+		
+			'<input id="ram" type="text" class="form-control" placeholder="ram" value="'+
+			itemToEdit.ram+'">'+
+			'</div>'+
+
+			'<div class="input-group" style="padding: 10px;">'+
+			'<span class="input-group-addon" style="width: 150px; color: white;">Color</span>'+		
+			'<input id="color" type="text" class="form-control" placeholder="color" value="'+
+			itemToEdit.color+'">'+
 			'</div>'+
 			''
 		));
@@ -309,11 +345,13 @@ Telefoane.prototype.updateTelefon=function(id)
 	var name=$("#name").val();
 	var model=$("#model").val();
 	var pret=$("#pret").val();
+	var ram=$("#ram").val();
+	var color=$("#color").val();
 	
 	var telefoane=this;	
 	$.ajax(
 	{
-		url: "./telefoane.php?update=1&id="+id+"&producator="+name+"&model="+model+"&pret"+pret,
+		url: "./telefoane.php?update=1&id="+id+"&producator="+name+"&model="+model+"&pret="+pret+"&ram="+ram+"&color="+color,
 		beforeSend : function(xhr) 
 		{
 			xhr.overrideMimeType("text/plain; charset=x-user-defined");
@@ -332,6 +370,7 @@ Telefoane.prototype.onUpdateTelefon=function()
 	
 	$("#inputGroup").remove();
 	this.read();
+	Calculatoare.prototype.read();
 }
 
 /*---------------------------------------------------------------------------*/

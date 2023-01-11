@@ -1,16 +1,16 @@
 
 /*---------------------------------------------------------------------------*/
 
-function Telefon(id,producator,model,pret,ram,color,creation_date)
+function Tastatura(id,producator,tip_cablu,pret,culoare,rgb,creation_date)
 {
-	//console.log("constructor Telefon");
+	//console.log("constructor Tastatura");
 
 	this.id=id;
 	this.producator=producator;
-	this.model=model;
+	this.tip_cablu=tip_cablu;
 	this.pret=pret;
-	this.ram=ram;
-	this.color=color;
+	this.culoare=culoare;
+	this.rgb=rgb;
 	this.creation_date=creation_date;
 };
 

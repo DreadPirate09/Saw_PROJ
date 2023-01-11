@@ -1,16 +1,16 @@
 
 /*---------------------------------------------------------------------------*/
 
-function Telefon(id,producator,model,pret,ram,color,creation_date)
+function Monitor(id,producator,frame_rate,pret,diagonala,tip_ecran,creation_date)
 {
-	//console.log("constructor Telefon");
+	//console.log("constructor Monitor");
 
 	this.id=id;
 	this.producator=producator;
-	this.model=model;
+	this.frame_rate=frame_rate;
 	this.pret=pret;
-	this.ram=ram;
-	this.color=color;
+	this.diagonala=diagonala;
+	this.tip_ecran=tip_ecran;
 	this.creation_date=creation_date;
 };
 
